@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Delivery Info</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <style>
+        html
+        {
+            zoom: 100%;
+        }
+        li:hover
+        {
+            background-color: darkred;
+        }
+        img:hover
+        {
+            opacity: 60%;
+        }
+        #title:first-letter
+        {
+            color: red;
+        }
+        li
+        {
+            list-style: none;
+        }
+           #third
+        {
+            position: absolute;
+            top: -55px;
+            left: 450px;
+            width: 250px;
+            height: 250px;
+        }
+         #fifth
+        {
+             position: absolute;
+             top: -6px;
+             left: 725px;
+             width: 120px;
+             height:120px;
+        }
+         #first
+        {
+            position: absolute;
+            top: -1px;
+            left: 1100px;
+            width: 110px;
+            height: 110px;
+        }
+         #second
+         {
+             position: absolute;
+            top: 5px;
+            left: 920px;
+            width: 100px;
+            height: 100px;
+         }
+    </style>
+</head>
+<body style="background-image: url('https://wallpaperaccess.com/full/1698013.jpg'); background-repeat: repeat;
+background-size: 100%">
+
+<div class="container-fluid" style="background-color: black; opacity: 95%;height: 150px;">
+
+<nav class="navbar navbar-expand-lg">
+    <h1 id="title" style="letter-spacing: 12px;" class="display-1 text-light">MVISUALS</h1>
+
+  <div class="container-fluid">
+    <div class="collapse navbar-collapse justify-content-end text-light fs-3 fst-italic" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link text-light" aria-current="page" href="/home">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-light" href="{% url 'cameras' %}">Cameras</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-light"  href="{% url 'drones' %}">Drones</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-light" href="/aboutus">About Us</a>
+        </li>
+       {% if user.is_authenticated and user.role == "buy" %}
+          <li class="nav-item">
+          <a class="nav-link text-light" href="/cart">MyCart</a>
+        </li>
+      {% endif %}
+          {% if user.is_authenticated %}
+        <li class="nav-item">
+          <a class="nav-link text-light" href="{% url 'logout_page' %}">Logout</a>
+        </li>
+              {% else %}
+               <li class="nav-item">
+                <a class="nav-link text-light" href="/login">Login</a>
+               </li>
+          {% endif %}
+      </ul>
+    </div>
+
+  </div>
+</nav>
+
+    <div style="position: relative; top:-100px;">
+        <img id="third"  src="https://assets.stickpng.com/thumbs/5cb84c677ff3656569c8cec6.png">
+        <img id="first" src="https://www.transparentpng.com/thumb/camera-lens/transparent-camera-lens-clipart-9.png">
+        <img id="fifth"  src="https://assets.stickpng.com/thumbs/61f7e4c767553f0004c53e8e.png">
+        <img id="second" src="https://assets.stickpng.com/thumbs/580b57fbd9996e24bc43bfe8.png">
+    </div>
+
+         <div class="col offset-md-8"  style="position: relative; left: 15px; top:-20px;">
+             <form action="{% url 'search_brand' %}" method="GET">
+                 <input value="{{ keyword }}" name="keyword" class="d-inline-block form-control w-75" type="text" placeholder="Search by Brand...">
+             <button type="submit" class="m-2 btn btn-dark">Search</button>
+                 </form>
+        </div>
+</div>
+
+<form method="POST" action="{% url 'confirm_order' %}" class="w-75 m-auto form-control mt-3 fs-5 fw-semibold rounded shadow bg-light p-4 m-auto">
+  {% csrf_token %}
+
+  {% if form.errors %}
+    <div class="alert alert-danger">
+      {% for field_errors in form.errors.values %}
+        {% for error in field_errors %}
+          {{ error }}
+        {% endfor %}
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  <div class="mb-3">
+    <label for="name" class="form-label">Name</label>
+    <input type="text" id="name" name="name" class="form-control" value="{{ form.name.value }}">
+  </div>
+
+  <div class="mb-3">
+    <label for="surname" class="form-label">Surname</label>
+    <input type="text" id="surname" name="surname" class="form-control" value="{{ form.surname.value }}">
+  </div>
+
+  <div class="mb-3">
+    <label for="address" class="form-label">Address</label>
+    <input type="text" id="address" name="address" class="form-control" value="{{ form.address.value }}">
+  </div>
+
+  <div class="mb-3">
+    <label for="city" class="form-label">City</label>
+    <input type="text" id="city" name="city" class="form-control" value="{{ form.city.value }}">
+  </div>
+
+  <div class="mb-3">
+    <label for="country" class="form-label">Country</label>
+    <input type="text" id="country" name="country" class="form-control" value="{{ form.country.value }}">
+  </div>
+
+  <div class="mb-3">
+    <label for="phone" class="form-label">Phone</label>
+    <input type="tel" id="phone" name="phone" class="form-control" value="{{ form.phone.value }}">
+  </div>
+    <div class="mb-3">
+    <label for="phone" class="form-label">Payment Options</label>
+        <div>
+            On Delivery <input type="radio" name="payment" value="pay" checked="true" class="form-check-input">
+            Credit Card <input type="radio" name="payment" value="pay" class="form-check-input">
+        </div>
+    <div class="text-center">
+    <button class="btn btn-lg w-25 text-light mt-2 px-4 py-2"  style="background-color: #146c43;"type="submit">Confirm <i class="bi bi-check2-circle"></i> </button>
+    </div>
+    </div>
+</form>
+</body>
+</html>
