@@ -119,7 +119,7 @@ background-size: 100%">
         </div>
 </div>
 
-<form method="POST" action="{% url 'confirm_order' %}" class="w-75 m-auto form-control mt-3 fs-5 fw-semibold rounded shadow bg-light p-4 m-auto">
+<form method="POST" action="{% url 'set_order' %}" class="w-75 m-auto form-control mt-3 fs-5 fw-semibold rounded shadow bg-light p-4 m-auto">
   {% csrf_token %}
 
   {% if form.errors %}
@@ -159,16 +159,11 @@ background-size: 100%">
 
   <div class="mb-3">
     <label for="phone" class="form-label">Phone</label>
-    <input type="tel" id="phone" name="phone" class="form-control" value="{{ form.phone.value }}">
+    <input type="text" id="phone" name="phone" class="form-control" value="{{ form.phone.value }}">
   </div>
     <div class="mb-3">
-    <label for="phone" class="form-label">Payment Options</label>
-        <div>
-            On Delivery <input type="radio" name="payment" value="pay" checked="true" class="form-check-input">
-            Credit Card <input type="radio" name="payment" value="pay" class="form-check-input">
-        </div>
     <div class="text-center">
-    <button class="btn btn-lg w-25 text-light mt-2 px-4 py-2"  style="background-color: #146c43;"type="submit">Confirm <i class="bi bi-check2-circle"></i> </button>
+    <button class="btn btn-lg w-25 text-light mt-2 px-4 py-2"  style="background-color: #146c43;" type="submit">Confirm <i class="bi bi-check2-circle"></i> </button>
     </div>
     </div>
 </form>

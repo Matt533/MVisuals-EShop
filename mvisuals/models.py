@@ -86,4 +86,4 @@ class Order(models.Model):
     date_creation = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return "Order Date:" + self.date_creation.__str__()
+        return "Order ID: " + self.id.__str__()

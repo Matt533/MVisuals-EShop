@@ -1,3 +1,4 @@
+import datetime
 from functools import wraps
 
 from django.contrib.auth.decorators import permission_required, user_passes_test
@@ -170,19 +171,25 @@ def set_order(request):
                     version_sum = 250
                 elif item.version == "Ultra":
                     version_sum = 500
-                item.total_price = item.quantity * item.book.price + version_sum
-                total_price += item.total_price
+            item.total_price = item.quantity * item.product.price + version_sum
+            total_price += item.total_price
 
             order = Order.objects.create(
                 user=user,
-                delivery_information=delivery_information,
-                total_price=total_price
+                info=delivery_information,
+                total=total_price
             )
-            return redirect('/confirmed')
+            return redirect('/confirm')
     else:
         form = DeliveryInfoForm(initial=initial_data)
+
     context = {'form': form}
     return render(request, "deliveryInfo.html", context)
+
+
+def confirm_order(request):
+    MyCart.objects.filter(user=request.user).delete()
+    return render(request, "Order Confirmed.html")
 
 
 def sort_price(request):
@@ -197,10 +204,6 @@ def sort_price(request):
         products = Product.objects.order_by('-price')[:10]
     return render(request, 'home.html', {'products': products, 'categories':categories})
 
-
-def confirm_order(request):
-    MyCart.objects.filter(user=request.user).delete()
-    return render(request, "Order Confirmed.html")
 
 
 def cart(request):
