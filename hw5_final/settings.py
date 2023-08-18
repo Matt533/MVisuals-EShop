@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-mlc$fzq7=m=&oh5$2de$vs*pw@mpzvbhbk90-*ya7oe+vsh4p+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['matejljusev.pythonanywhere.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['matejljusev.pythonanywhere.com', 'localhost', '127.0.0.1',]
 
 
 # Application definition
@@ -74,12 +74,18 @@ WSGI_APPLICATION = 'hw5_final.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'HOST': os.environ.get('DJANGO_DB_HOST'),
+        'NAME': os.environ.get('DJANGO_DB_NAME'),
+        'USER': os.environ.get('DJANGO_DB_USER'),
+        'PASSWORD': os.environ.get('DJANGO_DB_PASSWORD'),
     }
 }
+
+
 
 
 # Password validation
