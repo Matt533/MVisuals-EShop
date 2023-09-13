@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 import os.path
+import base64
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -25,7 +26,7 @@ SECRET_KEY = 'django-insecure-mlc$fzq7=m=&oh5$2de$vs*pw@mpzvbhbk90-*ya7oe+vsh4p+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['matejljusev.pythonanywhere.com', 'localhost', '127.0.0.1',]
+ALLOWED_HOSTS = ['matejljusev.pythonanywhere.com', 'localhost', '127.0.0.1', 'mvisuals.195100.com']
 
 
 # Application definition
@@ -52,6 +53,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'hw5_final.urls'
 
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -74,19 +76,16 @@ WSGI_APPLICATION = 'hw5_final.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'HOST': os.environ.get('DJANGO_DB_HOST'),
-        'NAME': os.environ.get('DJANGO_DB_NAME'),
-        'USER': os.environ.get('DJANGO_DB_USER'),
-        'PASSWORD': os.environ.get('DJANGO_DB_PASSWORD'),
+        'NAME': 'mydb',
+        'USER': 'postgres',
+        'PASSWORD': 'matej',
+        'HOST': 'kubernetes.docker.internal',
+        'PORT': '5432'
     }
 }
-
-
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators

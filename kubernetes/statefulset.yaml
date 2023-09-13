@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mydb
+  namespace: mvisuals
+spec:
+  serviceName: mydb
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mydb
+  template:
+    metadata:
+      labels:
+        app: mydb
+    spec:
+      hostname: mydb
+      containers:
+      - name: mydb
+        image: postgres:latest
+        ports:
+        - containerPort: 5432
+        volumeMounts:
+            - name: pvc
+              mountPath: /var/lib/docker/volumes/hw5_final_pgdata/_data
+        env:
+          - name: POSTGRES_USER
+            value: postgres
+          - name: POSTGRES_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: django-secrets
+                key: POSTGRES_PASSWORD
+          - name: POSTGRES_HOST_AUTH_METHOD
+            value: trust
+      volumes:
+      - name: pvc
+        persistentVolumeClaim:
+          claimName: pvc
+
