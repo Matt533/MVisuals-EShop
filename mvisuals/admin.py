@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
-from mvisuals.models import Product, Category, DeliveryInformation, Order, CustomUser, MyCart
+from mvisuals.models import Product, Category, DeliveryInformation, Order, CustomUser, MyCart, Post
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 
@@ -10,7 +10,7 @@ from django.contrib.auth.forms import UserCreationForm
 class ProductAdmin(admin.ModelAdmin):
     list_filter = ("category",)
 class CategoryAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('id', 'name')
 
 class DeliveryInformationAdmin(admin.ModelAdmin):
     pass
@@ -66,10 +66,14 @@ class CustomUserAdmin(UserAdmin):
     add_form = CustomUserCreationForm
 
 
+class PostAdmin(admin.ModelAdmin):
+    pass
+
 admin.site.register(CustomUser, CustomUserAdmin)
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Order, OrderAdmin)
 admin.site.register(MyCart, MyCartAdmin)
 admin.site.register(DeliveryInformation, DeliveryInformationAdmin)
+admin.site.register(Post, PostAdmin)
 

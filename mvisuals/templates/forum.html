@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+    <style>
+         #mvisuals:first-letter
+        {
+            color: darkred;
+        }
+        h1
+        {
+            letter-spacing: 12px;
+        }
+        li:hover
+        {
+            background-color: darkred;
+        }
+
+        img
+        {
+            width: 150px;
+            height: 100px;
+            margin: 0 20px;
+
+        }
+        .image-container
+        {
+            display:flex;
+            justify-content: center;
+        }
+        .images
+        {
+            width: 250px;
+            height: 200px;
+        }
+
+        li:hover
+        {
+            background-color: darkred;
+        }
+
+        img:hover
+        {
+            opacity: 60%;
+        }
+        @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color:#eee;
+}
+
+.container {
+    min-height: 100vh;
+    padding: 20px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center
+}
+
+p {
+    margin: 0px
+}
+
+.card {
+    display: flex;
+     flex-direction: column;
+    align-items: stretch;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    background: #fff;
+    transition: all 0.5s ease;
+    cursor: pointer;
+    user-select: none;
+    z-index: 10;
+    overflow: hidden
+}
+
+.card .backgroundEffect {
+    bottom: 0;
+    height: 0px;
+    width: 100%
+}
+
+.card:hover {
+    color: #fff;
+    transform: scale(1.025);
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 5px 10px
+}
+
+@keyframes popBackground {
+    0% {
+        height: 20px;
+        border-top-left-radius: 50%;
+        border-top-right-radius: 50%
+    }
+
+    50% {
+        height: 80px;
+        border-top-left-radius: 75%;
+        border-top-right-radius: 75%
+    }
+
+    75% {
+        height: 160px;
+        border-top-left-radius: 85%;
+        border-top-right-radius: 85%
+    }
+
+    100% {
+        height: 320px;
+        border-top-left-radius: 100%;
+        border-top-right-radius: 100%
+    }
+}
+
+.card .pic {
+    position: relative
+}
+
+.card .pic img {
+    width: 100%;
+    height: 350px;
+    object-fit: cover
+}
+
+.card .date {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 70px;
+    background-color: #1b9ce3;
+    color: white;
+    position: absolute;
+    bottom: 0px;
+    transition: all ease
+}
+
+.card .date .day {
+    font-size: 14px;
+    font-weight: 600
+}
+
+.card .date .month,
+.card .date .year {
+    font-size: 10px
+}
+
+.card .text-muted {
+    font-size: 12px
+}
+
+.card:hover .text-muted {
+    color: #fff !important
+}
+
+.card .content {
+    padding: 0 20px
+}
+
+.card .content .btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 10px;
+    background-color: #1b9ce3;
+    border-radius: 25px;
+    font-size: 12px;
+    border: none
+}
+
+.card:hover .content .btn {
+    background: #fff;
+    color: #1b9ce3;
+    box-shadow: #0000001a 0px 3px 5px
+}
+
+.card .content .btn .fas {
+    font-size: 10px;
+    padding-left: 5px
+}
+
+.card .content .foot .admin {
+    color: #1b9ce3;
+    font-size: 12px
+}
+
+.card:hover .content .foot .admin {
+    color: #fff
+}
+
+.card .content .foot .icon {
+    font-size: 12px
+}
+
+    </style>
+
+</head>
+<body style="background-image: url('https://wallpaperaccess.com/full/1698013.jpg'); background-repeat: repeat;
+background-size: 100%">
+<div class="container-fluid bg-black p-4" style="opacity: 95%;">
+    <nav class="navbar navbar-expand-lg">
+    <div class="container-fluid d-flex align-items-center">
+        <a style="text-decoration: none;" href="/home"><h1 id="mvisuals" class="display-1 fw-lighter text-light">MVISUALS</h1></a>
+    <div class="container-fluid image-container">
+        <img src="https://www.kruger-2-kalahari.com/images/Nikon-D800-image.png">
+        <img src="https://i1.adis.ws/i/canon/eos-100d-frt-w-ef-40mm-stm_b51df3fbe1be4c4d8ae102a6534213e2">
+        <img src="https://4.imimg.com/data4/UU/UU/GLADMIN-/tmp-asia-4016499630-3857477713-365508689-3015334490-1054978028-1977458298-3353927964-3865769526-500x500.png">
+        <img src="https://i1.adis.ws/i/canon/eos_1200d-fra-w-ef-s-18-55mm-iii_24927007dfc94639bc84db101a8b7136">
+    </div>
+
+  <div class="container-fluid">
+
+    <div class="collapse navbar-collapse d-flex justify-content-end text-light fs-3 fst-italic" id="navbarNav">
+
+      <ul class="navbar-nav">
+
+        <li class="nav-item">
+          <a class="nav-link text-light" aria-current="page" href="/home">Home</a>
+        </li>
+
+
+        <li class="nav-item">
+          <a class="nav-link text-light" href="/aboutus">About Us</a>
+        </li>
+
+       <li class="nav-item">
+              <a class="nav-link text-light" href="/forum">Blog</a>
+        </li>
+
+       {% if user.is_authenticated and user.role == "buy" %}
+          <li class="nav-item">
+          <a class="nav-link text-light" href="/cart">MyCart</a>
+        </li>
+      {% endif %}
+
+          {% if user.is_authenticated %}
+        <li class="nav-item">
+          <a class="nav-link text-light" href="{% url 'logout_page' %}">Logout</a>
+        </li>
+              {% else %}
+               <li class="nav-item">
+                <a class="nav-link text-light" href="/login">Login</a>
+               </li>
+          {% endif %}
+      </ul>
+    </div>
+  </div>
+
+    </div>
+</nav>
+</div>
+
+<div class="col-lg-8 m-4">
+    {% if user.is_authenticated %}
+                  <a href="{% url 'add_post' %}">
+                    <button type="submit" style="width: 250px;color: #1a1d20;" class="btn btn-light fs-5 fw-semibold">ADD POST</button>
+                </a>
+    {% endif %}
+    </div>
+
+<div class="container-fluid mt-4">
+    <div class="d-lg-flex">
+        {% for p in posts %}
+        <div style="width: 600px;" class="bg-dark-subtle card border-0 me-lg-4 mb-lg-0 mb-4">
+            <div class="backgroundEffect"></div>
+            <div class="pic">
+                 <a class="text-black text-decoration-none" href="{% url 'post_details' p.id %}">
+                <img class="" src="{{ MEDIA_URL }} {{ p.image2.url }}" alt="">
+                 </a>
+                <div class="date">
+                    <span class="day"> {{ p.created_at|date:"d" }}</span>
+                    <span class="month">{{ p.created_at|date:"F" }}</span>
+                    <span class="year">{{ p.created_at|date:"Y" }}</span>
+                </div>
+            </div>
+            <div class="content">
+                <p class="display-6 text-center mt-4">{{ p.title }}</p>
+                <p class="text-muted mt-3">{{ p.display }}</p>
+                <div class="d-flex align-items-center justify-content-between mt-3 pb-3">
+                    <div class="btn btn-primary">
+                        <a class="text-black text-decoration-none" href="{% url 'post_details' p.id %}">
+                        Read More<span  class="fas fa-arrow-right"></span>
+                            </a>
+                    </div>
+                    <div class="d-flex align-items-center justify-content-center foot">
+                        <p class="admin fs-5">{{ p.author.username }}</p> <p class="ps-3 icon fs-5 text-muted">
+                        <span class="fas fa-comment-alt pe-1"></span>{{ p.author.posts.count }}</p></div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+</body>
+
+</html>

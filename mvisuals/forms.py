@@ -1,8 +1,39 @@
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 
-from mvisuals.models import CustomUser, Product, DeliveryInformation
+from mvisuals.models import CustomUser, Product, DeliveryInformation, Post
 
+
+class AddPostForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        exclude = ('author', )  # Exclude author field from the form
+
+    def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop('user', None)  # Get the user from the kwargs
+        super().__init__(*args, **kwargs)
+        for field in self.visible_fields():
+            field.field.widget.attrs['class'] = 'form-control mb-3'
+
+    def save(self, commit=True):
+        instance = super(AddPostForm, self).save(commit=False)
+        if self.user:
+            instance.author = self.user  # Set the author to the user who clicked the button
+            instance.author_id = self.user.id  # Set the author_id explicitly
+        if commit:
+            instance.save()
+        return instance
+
+class PostForm(forms.ModelForm):
+            class Meta:
+                model = Post
+                fields = ['title', 'content', 'display', 'image1', 'image2', 'image3',
+                          'image4']
+
+            def __init__(self, *args, **kwargs):
+                super().__init__(*args, **kwargs)
+                for field in self.visible_fields():
+                    field.field.widget.attrs['class'] = 'form-control mb-3'
 
 class CustomAuthenticationForm(AuthenticationForm):
     def __init__(self, *args, **kwargs):

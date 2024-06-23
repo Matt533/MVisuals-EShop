@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Post</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+      <style>
+         #mvisuals:first-letter
+        {
+            color: darkred;
+        }
+        #mvisuals
+        {
+            letter-spacing: 12px;
+        }
+        li:hover
+        {
+            background-color: darkred;
+        }
+
+        img
+        {
+            width: 150px;
+            height: 100px;
+            margin: 0 20px;
+
+        }
+        .image-container
+        {
+            display:flex;
+            justify-content: center;
+        }
+        .images
+        {
+            width: 250px;
+            height: 200px;
+        }
+
+        li:hover
+        {
+            background-color: darkred;
+        }
+
+        img:hover
+        {
+            opacity: 60%;
+        }
+
+        li
+        {
+            list-style: none;
+        }
+
+
+         @keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.fade-in
+{
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+   .card {
+        background-color: #e2e3e5;
+        width: 260px;
+        border: 1px solid black;
+        border-radius: 5px;
+        margin: 20px;
+        opacity: 0;
+        transition: opacity 1s ease-in-out;
+}
+    .product-card {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        flex: 1;
+    }
+
+    .card img {
+    display: block;
+    margin: 0 auto;
+    width: 200px;
+    height: 150px;
+}
+.card-body {
+        background-color: transparent;
+        text-align: center;
+    }
+
+    .btn {
+        margin-top: 10px;
+    }
+
+    #detailsp
+    {
+        text-align: center;
+    }
+
+    #slika
+    {
+        width: 180px;
+        height: 150px;
+    }
+
+    </style>
+</head>
+<body style="background-image: url('https://wallpaperaccess.com/full/1698013.jpg'); background-repeat: repeat;
+background-size: 100%">
+
+<div class="container-fluid bg-black p-4" style="opacity: 95%;">
+    <nav class="navbar navbar-expand-lg">
+    <div class="container-fluid d-flex align-items-center">
+        <a style="text-decoration: none;" href="/home"><h1 id="mvisuals" class="display-1 fw-lighter text-light">MVISUALS</h1></a>
+    <div class="container-fluid image-container">
+        <img src="https://www.kruger-2-kalahari.com/images/Nikon-D800-image.png">
+        <img src="https://i1.adis.ws/i/canon/eos-100d-frt-w-ef-40mm-stm_b51df3fbe1be4c4d8ae102a6534213e2">
+        <img src="https://4.imimg.com/data4/UU/UU/GLADMIN-/tmp-asia-4016499630-3857477713-365508689-3015334490-1054978028-1977458298-3353927964-3865769526-500x500.png">
+        <img src="https://i1.adis.ws/i/canon/eos_1200d-fra-w-ef-s-18-55mm-iii_24927007dfc94639bc84db101a8b7136">
+    </div>
+
+  <div class="container-fluid">
+
+    <div class="collapse navbar-collapse d-flex justify-content-end text-light fs-3 fst-italic" id="navbarNav">
+
+      <ul class="navbar-nav">
+
+        <li class="nav-item">
+          <a class="nav-link text-light" aria-current="page" href="/home">Home</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link text-light" href="/aboutus">About Us</a>
+        </li>
+
+     <li class="nav-item">
+              <a class="nav-link text-light" href="/forum">Blog</a>
+        </li>
+
+       {% if user.is_authenticated and user.role == "buy" %}
+          <li class="nav-item">
+          <a class="nav-link text-light" href="/cart">MyCart</a>
+        </li>
+      {% endif %}
+
+          {% if user.is_authenticated %}
+        <li class="nav-item">
+          <a class="nav-link text-light" href="{% url 'logout_page' %}">Logout</a>
+        </li>
+
+              {% else %}
+               <li class="nav-item">
+                <a class="nav-link text-light" href="/login">Login</a>
+               </li>
+          {% endif %}
+      </ul>
+    </div>
+  </div>
+    </div>
+</nav>
+    <div class="container-fluid d-flex justify-content-end">
+        <form style="width: 515px;" class="d-flex align-items-center" action="{% url 'search_brand' %}" method="GET">
+            <input required title="Please enter a keyword" id="keyword" value="{{ keyword }}" name="keyword" class="form-control me-2" type="text" placeholder="Search..." style="min-width: 200px;">
+            <button style="margin-bottom: 6px;" type="submit" class="btn btn-dark">Search</button>
+        </form>
+    </div>
+
+    </div>
+
+<div class="d-flex justify-content-center">
+
+    <div class="col-md-3 d-flex justify-content-center align-items-center">
+        <img class="images" src="https://assets.stickpng.com/thumbs/580b57fbd9996e24bc43bfb1.png">
+    </div>
+
+    <div class="container-fluid w-75">
+        <h1 class=" display-5 text-center fw-semibold  text-light my-3">Add Post</h1>
+        <div class="w-75 m-auto shadow-lg bg-light rounded p-5">
+            <form class="fw-semibold text-dark fs-4"  method="POST" action="{% url 'add_post' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+                <div class="text-center"><button type="submit"  class="btn btn-dark w-50">ADD POST</button></div>
+            </form>
+        </div>
+
+    </div>
+
+    <div class="col-md-3 d-flex justify-content-center align-items-center">
+     <img class="images" src="https://assets.stickpng.com/thumbs/61d2fbd592b57c0004c6474e.png">
+</div>
+      </div>
+</body>
+</html>

@@ -2,106 +2,238 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register Form</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <style>
+    #mvisuals:first-letter
+        {
+            color: darkred;
+        }
+        h1
+        {
+            letter-spacing: 12px;
+        }
         li:hover
         {
             background-color: darkred;
         }
+
+        img
+        {
+            width: 150px;
+            height: 100px;
+            margin: 0 20px;
+
+        }
+        .image-container
+        {
+            display:flex;
+            justify-content: center;
+        }
+        .images
+        {
+            width: 250px;
+            height: 200px;
+        }
+
+        li:hover
+        {
+            background-color: darkred;
+        }
+
         img:hover
         {
             opacity: 60%;
         }
-        #title:first-letter
-        {
-            color: red;
-        }
+
         li
         {
             list-style: none;
         }
-           #third
-        {
-            position: absolute;
-            top: -55px;
-            left: 450px;
-            width: 250px;
-            height: 250px;
-        }
-         #fifth
-        {
-             position: absolute;
-             top: -6px;
-             left: 725px;
-             width: 120px;
-             height:120px;
-        }
-         #first
-        {
-            position: absolute;
-            top: -1px;
-            left: 1100px;
-            width: 110px;
-            height: 110px;
-        }
-         #second
-         {
-             position: absolute;
-            top: 5px;
-            left: 920px;
-            width: 100px;
-            height: 100px;
-         }
-         #info
-         {
-             position: relative;
-             left: 498px;
-             top: 50px;
-             background-color: black;
-             width: 975px;
-             height: 570px;
-             border: 1px solid darkred;
-             border-radius: 15px;
-             font-size: 45px;
 
-         }
+
+         @keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.fade-in
+{
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+   .card {
+        background-color: #e2e3e5;
+        width: 260px;
+        border: 1px solid black;
+        border-radius: 5px;
+        margin: 20px;
+        opacity: 0;
+        transition: opacity 1s ease-in-out;
+}
+    .product-card {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        flex: 1;
+    }
+
+    .card img {
+    display: block;
+    margin: 0 auto;
+    width: 200px;
+    height: 150px;
+}
+.card-body {
+        background-color: transparent;
+        text-align: center;
+    }
+
+    .btn {
+        margin-top: 10px;
+    }
+
+    #detailsp
+    {
+        text-align: center;
+    }
+
+    #slika
+    {
+        width: 180px;
+        height: 150px;
+    }
+    .sliki
+    {
+        width: 300px;
+        height: 250px;
+    }
     </style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const productList = document.getElementById("product-list");
+
+        // Apply fade-in effect to all product cards after sorting
+        const sortedProductCards = productList.querySelectorAll(".card");
+        sortedProductCards.forEach(function(card, index) {
+            setTimeout(function() {
+                card.style.opacity = "1";
+            }, index * 100);
+        })
+
+    })
+
+        document.addEventListener("DOMContentLoaded", () => {
+    const sortSelect = document.getElementById("sort_price");
+    const productList = document.getElementById("product-list");
+    let initialProductsOrder = [];
+
+    // Save the initial order of products
+    Array.from(productList.querySelectorAll(".card")).forEach(product => {
+        initialProductsOrder.push(product);
+    });
+
+    sortSelect.addEventListener("change", () => {
+        const sortOption = sortSelect.value;
+
+        if (sortOption === '') {
+            // Restore the initial order of products
+            productList.innerHTML = '';
+            initialProductsOrder.forEach(product => {
+                productList.appendChild(product);
+            });
+        } else {
+            const products = Array.from(productList.querySelectorAll(".card"));
+
+            // Sort products based on the selected option
+            products.sort((a, b) => {
+                const priceA = parseFloat(a.getAttribute('data-price'));
+                const priceB = parseFloat(b.getAttribute('data-price'));
+
+                if (sortOption === 'lowest') {
+                    return priceA - priceB;
+                } else if (sortOption === 'highest') {
+                    return priceB - priceA;
+                } else {
+                    return 0;
+                }
+            });
+
+            // Clear existing list and append sorted products with fade-in animation
+            productList.innerHTML = '';
+            products.forEach(product => {
+                productList.appendChild(product);
+                product.classList.add('fade-in');
+            });
+        }
+    });
+});
+        function validateSearchForm()
+        {
+    var keyword = document.getElementById('keyword').value.trim(); // Get the keyword and trim any leading/trailing spaces
+
+    if (keyword === '') {
+        alert('Please fill in the search input.'); // Display alert message
+        return false; // Prevent form submission
+    }
+
+    return true; // Allow form submission if input is not empty
+}
+
+</script>
 </head>
 <body style="background-image: url('https://wallpaperaccess.com/full/1698013.jpg'); background-repeat: repeat;
 background-size: 100%">
 
-<div class="container-fluid" style="background-color: black; opacity: 95%;height: 150px;">
-
-<nav class="navbar navbar-expand-lg">
-    <a style="text-decoration: none;" href="/home"><h1 id="title" style="letter-spacing: 12px;" class="display-1 text-light">MVISUALS</h1></a>
+<div class="container-fluid bg-black p-4" style="opacity: 95%;">
+    <nav class="navbar navbar-expand-lg">
+    <div class="container-fluid d-flex align-items-center">
+        <a style="text-decoration: none;" href="/home"><h1 id="mvisuals" class="display-1 fw-lighter text-light">MVISUALS</h1></a>
+    <div class="container-fluid image-container">
+        <img src="https://www.kruger-2-kalahari.com/images/Nikon-D800-image.png">
+        <img src="https://i1.adis.ws/i/canon/eos-100d-frt-w-ef-40mm-stm_b51df3fbe1be4c4d8ae102a6534213e2">
+        <img src="https://4.imimg.com/data4/UU/UU/GLADMIN-/tmp-asia-4016499630-3857477713-365508689-3015334490-1054978028-1977458298-3353927964-3865769526-500x500.png">
+        <img src="https://i1.adis.ws/i/canon/eos_1200d-fra-w-ef-s-18-55mm-iii_24927007dfc94639bc84db101a8b7136">
+    </div>
 
   <div class="container-fluid">
-    <div class="collapse navbar-collapse justify-content-end text-light fs-3 fst-italic" id="navbarNav">
+
+    <div class="collapse navbar-collapse d-flex justify-content-end text-light fs-3 fst-italic" id="navbarNav">
+
       <ul class="navbar-nav">
+
         <li class="nav-item">
           <a class="nav-link text-light" aria-current="page" href="/home">Home</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link text-light" href="{% url 'cameras' %}">Cameras</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-light"  href="{% url 'drones' %}">Drones</a>
-        </li>
+
+
         <li class="nav-item">
           <a class="nav-link text-light" href="/aboutus">About Us</a>
         </li>
+
+       <li class="nav-item">
+              <a class="nav-link text-light" href="/forum">Blog</a>
+        </li>
+
        {% if user.is_authenticated and user.role == "buy" %}
           <li class="nav-item">
           <a class="nav-link text-light" href="/cart">MyCart</a>
         </li>
       {% endif %}
+
           {% if user.is_authenticated %}
         <li class="nav-item">
           <a class="nav-link text-light" href="{% url 'logout_page' %}">Logout</a>
         </li>
+
               {% else %}
                <li class="nav-item">
                 <a class="nav-link text-light" href="/login">Login</a>
@@ -109,25 +241,30 @@ background-size: 100%">
           {% endif %}
       </ul>
     </div>
+
   </div>
+    </div>
 </nav>
 
-    <div style="position: relative; top:-100px;">
-        <img id="third"  src="https://assets.stickpng.com/thumbs/5cb84c677ff3656569c8cec6.png">
-        <img id="first" src="https://www.transparentpng.com/thumb/camera-lens/transparent-camera-lens-clipart-9.png">
-        <img id="fifth"  src="https://assets.stickpng.com/thumbs/61f7e4c767553f0004c53e8e.png">
-        <img id="second" src="https://assets.stickpng.com/thumbs/580b57fbd9996e24bc43bfe8.png">
+    <div class="container-fluid d-flex justify-content-end">
+        <form style="width: 515px;" class="d-flex align-items-center" action="{% url 'search_brand' %}" method="GET">
+            <input required title="Please enter a keyword" id="keyword" value="{{ keyword }}" name="keyword" class="form-control me-2" type="text" placeholder="Search..." style="min-width: 200px;">
+            <button style="margin-bottom: 6px;" type="submit" class="btn btn-dark">Search</button>
+        </form>
     </div>
 
-         <div class="col offset-md-8"  style="position: relative; left: 15px; top:-20px;">
-             <form action="{% url 'search_brand' %}" method="GET">
-                    <input value="{{ keyword }}" name="keyword" class="d-inline-block form-control w-75" type="text" placeholder="Search by Brand...">
-                    <button type="submit" class="m-2 btn btn-dark">Search</button>
-             </form>
-        </div>
+    </div>
+
+
+
+<div class="container-fluid mt-3 w-75 p-3 m-auto d-flex justify-content-center">
+
+<div class="d-flex col-md-3 justify-content-center align-items-center ">
+     <img class="sliki"  src="https://assets.stickpng.com/thumbs/61d2fbd592b57c0004c6474e.png">
 </div>
-<div class="container-fluid mt-3 w-50 p-3 m-auto">
-    <form method="POST" class="w-75 m-auto form-control rounded shadow bg-dark-subtle p-5 text-center">
+
+<div class="col-md-9">
+    <form method="POST" class="w-50 m-auto form-control rounded shadow bg-dark-subtle p-5 text-center">
         {% csrf_token %}
     {% if form.errors %}
     <div class="errors">
@@ -158,9 +295,10 @@ background-size: 100%">
     </button>
     </form>
 </div>
-<div>
-     <img style="position: relative; top: -390px;left: 1500px;" src="https://assets.stickpng.com/thumbs/61d2fbd592b57c0004c6474e.png">
-            <img style="width: 300px; position: relative; top: -390px; left: -200px;" src="https://assets.stickpng.com/thumbs/580b57fbd9996e24bc43bfb1.png">
+
+<div class="d-flex col-md-3 justify-content-center align-items-center">
+  <img class="sliki"  src="https://assets.stickpng.com/thumbs/580b57fbd9996e24bc43bfb1.png">
+    </div>
 </div>
 </body>
 </html>

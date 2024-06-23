@@ -31,6 +31,20 @@ class CustomUser(AbstractUser):
     )
 
 
+class Post(models.Model):
+    title = models.CharField(max_length=100)
+    content = models.TextField()
+    display = models.TextField(default="Display Default")
+    author = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='posts')
+    created_at = models.DateTimeField(auto_now_add=True)
+    image1 = models.ImageField(upload_to="products", default="/hw5_final/media/products/canon.jpg")
+    image2 = models.ImageField(upload_to="products", default="/hw5_final/media/products/canon.jpg")
+    image3 = models.ImageField(upload_to="products", default="/hw5_final/media/products/canon.jpg")
+    image4 = models.ImageField(upload_to="products", default="/hw5_final/media/products/canon.jpg")
+
+    def __str__(self):
+        return self.title
+
 class Category(models.Model):
     name = models.CharField(max_length=100)
 

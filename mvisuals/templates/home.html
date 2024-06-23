@@ -2,97 +2,240 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
     <style>
-        html
+         #mvisuals:first-letter
         {
-            zoom: 100%;
+            color: darkred;
+        }
+        h1
+        {
+            letter-spacing: 12px;
         }
         li:hover
         {
             background-color: darkred;
         }
+
+        img
+        {
+            width: 150px;
+            height: 100px;
+            margin: 0 20px;
+
+        }
+        .image-container
+        {
+            display:flex;
+            justify-content: center;
+        }
+        .images
+        {
+            width: 250px;
+            height: 200px;
+        }
+
+        li:hover
+        {
+            background-color: darkred;
+        }
+
         img:hover
         {
             opacity: 60%;
         }
-        h1:first-letter
-        {
-            color: red;
-        }
+
         li
         {
             list-style: none;
         }
-           #third
+        .disabled-card
         {
-            position: absolute;
-            top: -55px;
-            left: 450px;
-            width: 250px;
-            height: 250px;
+            opacity: 0.6;
+            pointer-events: none;
         }
-         #fifth
-        {
-             position: absolute;
-             top: -6px;
-             left: 725px;
-             width: 120px;
-             height:120px;
-        }
-         #first
-        {
-            position: absolute;
-            top: -1px;
-            left: 1100px;
-            width: 110px;
-            height: 110px;
-        }
-         #second
-         {
-             position: absolute;
-            top: 5px;
-            left: 920px;
-            width: 100px;
-            height: 100px;
-         }
+
+         @keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.fade-in
+{
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+   .card {
+        background-color: #e2e3e5;
+        width: 260px;
+        border: 1px solid black;
+        border-radius: 5px;
+        margin: 20px;
+        opacity: 0;
+        transition: opacity 1s ease-in-out;
+}
+    .product-card {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        flex: 1;
+    }
+
+    .card img {
+    display: block;
+    margin: 0 auto;
+    width: 200px;
+    height: 150px;
+}
+.card-body {
+        background-color: transparent;
+        text-align: center;
+    }
+
+    .btn {
+        margin-top: 10px;
+    }
+
+    #detailsp
+    {
+        text-align: center;
+    }
+
+    #slika
+    {
+        width: 180px;
+        height: 150px;
+    }
+
     </style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const productList = document.getElementById("product-list");
+
+        // Apply fade-in effect to all product cards after sorting
+        const sortedProductCards = productList.querySelectorAll(".card");
+        sortedProductCards.forEach(function(card, index) {
+            setTimeout(function() {
+                card.style.opacity = "1";
+            }, index * 100);
+        })
+
+    })
+
+        document.addEventListener("DOMContentLoaded", () => {
+    const sortSelect = document.getElementById("sort_price");
+    const productList = document.getElementById("product-list");
+    let initialProductsOrder = [];
+
+    // Save the initial order of products
+    Array.from(productList.querySelectorAll(".card")).forEach(product => {
+        initialProductsOrder.push(product);
+    });
+
+    sortSelect.addEventListener("change", () => {
+        const sortOption = sortSelect.value;
+
+        if (sortOption === '') {
+            // Restore the initial order of products
+            productList.innerHTML = '';
+            initialProductsOrder.forEach(product => {
+                productList.appendChild(product);
+            });
+        } else {
+            const products = Array.from(productList.querySelectorAll(".card"));
+
+            // Sort products based on the selected option
+            products.sort((a, b) => {
+                const priceA = parseFloat(a.getAttribute('data-price'));
+                const priceB = parseFloat(b.getAttribute('data-price'));
+
+                if (sortOption === 'lowest') {
+                    return priceA - priceB;
+                } else if (sortOption === 'highest') {
+                    return priceB - priceA;
+                } else {
+                    return 0;
+                }
+            });
+
+            // Clear existing list and append sorted products with fade-in animation
+            productList.innerHTML = '';
+            products.forEach(product => {
+                productList.appendChild(product);
+                product.classList.add('fade-in');
+            });
+        }
+    });
+});
+        function validateSearchForm()
+        {
+    var keyword = document.getElementById('keyword').value.trim(); // Get the keyword and trim any leading/trailing spaces
+
+    if (keyword === '') {
+        alert('Please fill in the search input.'); // Display alert message
+        return false; // Prevent form submission
+    }
+
+    return true; // Allow form submission if input is not empty
+}
+
+</script>
+
 </head>
+
 <body style="background-image: url('https://wallpaperaccess.com/full/1698013.jpg'); background-repeat: repeat;
 background-size: 100%">
 
-<div class="container-fluid" style="background-color: black; opacity: 95%;height: 150px;">
-
-<nav class="navbar navbar-expand-lg">
-    <a style="text-decoration: none;" href="/home"><h1 style="letter-spacing: 12px;" class="display-1 text-light">MVISUALS</h1></a>
+<div class="container-fluid bg-black p-4" style="opacity: 95%;">
+    <nav class="navbar navbar-expand-lg">
+    <div class="container-fluid d-flex align-items-center">
+        <a style="text-decoration: none;" href="/home"><h1 id="mvisuals" class="display-1 fw-lighter text-light">MVISUALS</h1></a>
+    <div class="container-fluid image-container">
+        <img src="https://www.kruger-2-kalahari.com/images/Nikon-D800-image.png">
+        <img src="https://i1.adis.ws/i/canon/eos-100d-frt-w-ef-40mm-stm_b51df3fbe1be4c4d8ae102a6534213e2">
+        <img src="https://4.imimg.com/data4/UU/UU/GLADMIN-/tmp-asia-4016499630-3857477713-365508689-3015334490-1054978028-1977458298-3353927964-3865769526-500x500.png">
+        <img src="https://i1.adis.ws/i/canon/eos_1200d-fra-w-ef-s-18-55mm-iii_24927007dfc94639bc84db101a8b7136">
+    </div>
 
   <div class="container-fluid">
-    <div class="collapse navbar-collapse justify-content-end text-light fs-3 fst-italic" id="navbarNav">
+
+    <div class="collapse navbar-collapse d-flex justify-content-end text-light fs-3 fst-italic" id="navbarNav">
+
       <ul class="navbar-nav">
+
         <li class="nav-item">
           <a class="nav-link text-light" aria-current="page" href="/home">Home</a>
         </li>
+
         <li class="nav-item">
-          <a class="nav-link text-light" href="{% url 'cameras' %}">Cameras</a>
+          <a style="display: inline-block" class="nav-link text-light" href="/aboutus">About Us</a>
         </li>
+
         <li class="nav-item">
-          <a class="nav-link text-light"  href="{% url 'drones' %}">Drones</a>
+              <a class="nav-link text-light" href="/forum">Blog</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link text-light" href="/aboutus">About Us</a>
-        </li>
+
        {% if user.is_authenticated and user.role == "buy" %}
           <li class="nav-item">
           <a class="nav-link text-light" href="/cart">MyCart</a>
         </li>
       {% endif %}
+
           {% if user.is_authenticated %}
         <li class="nav-item">
           <a class="nav-link text-light" href="{% url 'logout_page' %}">Logout</a>
         </li>
+
               {% else %}
                <li class="nav-item">
                 <a class="nav-link text-light" href="/login">Login</a>
@@ -100,29 +243,22 @@ background-size: 100%">
           {% endif %}
       </ul>
     </div>
-
   </div>
+    </div>
 </nav>
-
-    <div style="position: relative; top:-100px;">
-        <img id="third"  src="https://assets.stickpng.com/thumbs/5cb84c677ff3656569c8cec6.png">
-        <img id="first" src="https://www.transparentpng.com/thumb/camera-lens/transparent-camera-lens-clipart-9.png">
-        <img id="fifth"  src="https://assets.stickpng.com/thumbs/61f7e4c767553f0004c53e8e.png">
-        <img id="second" src="https://assets.stickpng.com/thumbs/580b57fbd9996e24bc43bfe8.png">
+    <div class="container-fluid d-flex justify-content-end">
+        <form style="width: 515px;" class="d-flex align-items-center" action="{% url 'search_brand' %}" method="GET">
+            <input required title="Please enter a keyword" id="keyword" value="{{ keyword }}" name="keyword" class="form-control me-2" type="text" placeholder="Search..." style="min-width: 200px;">
+            <button style="margin-bottom: 6px;" type="submit" class="btn btn-dark">Search</button>
+        </form>
     </div>
 
-         <div class="col offset-md-8"  style="position: relative; left: 15px; top:-20px;">
-             <form action="{% url 'search_brand' %}" method="GET">
-                 <input value="{{ keyword }}" name="keyword" class="d-inline-block form-control w-75" type="text" placeholder="Search by Brand...">
-             <button type="submit" class="m-2 btn btn-dark">Search</button>
-                 </form>
-        </div>
-</div>
+    </div>
 
-<div class="container-fluid">
-    <div class="row m-2">
+<div class="container-fluid m-2">
+<div class="row d-flex justify-content-start ">
 
-    <div class="col-3 p-1">
+    <div style="margin-left: 16px;" class="col-md-2">
     {% if user.is_authenticated and user.role == "sell" %}
                   <a href="{% url 'add_product' %}">
                     <button type="submit" style="width: 250px;color: #1a1d20;" class="btn btn-light fs-5 fw-semibold">ADD PRODUCT</button>
@@ -130,70 +266,87 @@ background-size: 100%">
        {% endif %}
     </div>
 
-    <div style="width: 450px;position: relative;left:-480px;" class="col-5 offset-2 bg-light-subtle rounded-3 p-2">
-        <form class="inline" method="POST" action="{% url 'sort_items' %}">
-            {% csrf_token %}
-            <label class="text-dark fs-5" for="sort_price">Sort by</label>
-            <div class="d-inline-flex">
-            <select style="width: 200px;" class="form-select offset-1" id="sort_price"  name="sort_price">
-                <option value=""></option>
-                <option class="text-dark" value="lowest">Price: Low to High</option>
-                 <option class="text-dark" value="highest">Price: High to Low</option>
-            </select>
-            </div>
-            <input type="hidden" name="category_id" value="{{ category_id }}">
-            <button style="background-color: #1a1d20;" class="btn  text-light fs-6 fw-lighter w-25 offset-1" type="submit">Sort</button>
-        </form>
-    </div>
+        <div class="col-md-2 mt-1 bg-light-subtle rounded-3 p-2">
+            <form id="sortForm" class="inline" method="GET">
+                {% csrf_token %}
+                <label class="text-dark fs-5" for="sort_price">Sort by</label>
 
-        <h2 class="display-6 text-light m-2">Categories</h2>
-        <div class="col-12" style="width: 230px; height:270px;background-color: black;border: 1px solid darkred; border-radius: 15px;">
+                <div class="d-inline-flex">
+                    <select style="width: 210px;" class="form-select offset-1" id="sort_price"  name="sort_price">
+                    <option value=""></option>
+                    <option class="text-dark" value="lowest">Price: Low to High</option>
+                    <option class="text-dark" value="highest">Price: High to Low</option>
+                    </select>
+                </div>
+            </form>
+        </div>
 
+</div>
+
+</div>
+
+
+<div class="container-fluid d-flex">
+
+    <div class="row m-2">
+
+        <div style="width: 250px;" class="row m-2">
+ <div class="d-flex align-items-center justify-content-center">
+           <h2 class="display-6 text-light">Categories</h2>
+       </div>
+
+        <div class="d-block border border-danger rounded-3 bg-black">
             <ul class="fw-lighter">
-            {% for c in categories %}
+            {% for c in categories|slice:":6" %}
                 <li class="nav-item">
                     <a class="nav-link text-light" style="font-size: 40px" href="{% url 'filter_category' %}?category={{ c.id }}">{{ c.name }}</a>
                 </li>
             {% endfor %}
             </ul>
-
-        </div>
-        <div class="col-10 m-3">
-            {% for p in products %}
-            <div class="card d-inline-block m-4" style="position: relative; top:-50px; background-color: #e2e3e5;  width: 245px; border:1px solid black; border-radius: 5px;">
-            <img style="margin-left: 25px; width: 200px; height: 150px;" class="align-center" src="{{ MEDIA_URL }} {{ p.image.url }}" alt="Card image cap">
-                 <div class="card-body" style="background-color: transparent;">
-                    <h2 class="display-6 fs-2  text-dark fst-normal text-center">{{ p.product_name }}</h2>
-                    <p class="text-dark text-center fst-italic fs-4 text-center">${{ p.price }}</p>
-                  {% if user.is_authenticated and user.role == "buy" %}
-                      <form method="POST" action="{% url 'add' p.id %}">
-                          <a href="{% url 'product_details' p.id %}"  class="btn btn-outline-dark">Details</a>
-                         {% csrf_token %}
-                    <button type="submit" value="add_cart" name="action" class="btn btn-outline-success">Add to Cart <i class="bi-cart-plus"></i></button>
-                      </form>
-                      {% elif user.is_authenticated and user.role == "sell" %}
-                      <form class="text-center" method="POST" action="{% url 'add' p.id %}">
-                          <a href="{% url 'product_details' p.id %}"  class="btn btn-outline-dark">Details</a>
-                         {% csrf_token %}
-                      </form>
-                      {% else %}
-                      <form class="text-center" method="POST" action="{% url 'add' p.id %}">
-                          <a href="{% url 'product_details' p.id %}"  class="btn btn-outline-dark">Details</a>
-                         {% csrf_token %}
-                      </form>
-                 {% endif %}
-
-                 </div>
-            </div>
-            {% endfor %}
         </div>
 
-        <div class="col-12 d-inline-block" style="position: absolute; top:570px;width: 230px; height:400px;background-color: black;border: 1px solid darkred; border-radius: 15px;">
-                <h2 class="display-6 text-light text-center">Product of the Week</h2>
-                <img style="margin-left: -20px;width: 250px; height: 250px;" src="https://www1.djicdn.com/cms/uploads/ae5d8b9987be8d5ecdeb5d502a1e887c@374*374.png">
-                <p class="fs-3 text-light fw-lighter text-center">DJI MAVIC PRO 3</p>
-            </div>
+    <div class="d-block border border-danger rounded-3 mt-4 bg-black">
+        <h2 class="display-6 text-light text-center">Product of the Day</h2>
+        {% if random_product %}
+            <a href="{% url 'product_details' random_product.id %}">
+                <img id="slika" src="{{ MEDIA_URL }}{{ random_product.image.url }}" alt="Card image cap">
+            </a>
+                <p class="fs-3 text-light fw-lighter text-center">{{ random_product.product_name }}</p>
+         {% else %}
+        <p class="fs-3 text-light fw-lighter text-center">No Product Available</p>
+        {% endif %}
     </div>
+
+       </div>
+
+
+    </div>
+
+  <div id="product-list" class="m-3 product-card">
+    {% for p in products %}
+    <div data-price="{{ p.price }}" class="card {% if p.quantity == 0 %}disabled-card{% endif %}">
+        <img src="{{ MEDIA_URL }}{{ p.image.url }}" alt="Card image cap">
+        <div class="card-body">
+            <h2 class="display-6 fs-2 text-dark fst-normal text-center product-name">{{ p.product_name }}</h2>
+            <p class="text-dark text-center fst-italic fs-4">${{ p.price }}</p>
+            {% if user.is_authenticated %}
+            <form id="detailsp" method="POST" action="{% url 'add' p.id %}">
+                <a href="{% url 'product_details' p.id %}" class="btn btn-outline-dark">Details</a>
+                {% csrf_token %}
+                <button type="submit" value="add_cart" name="action"  class="btn btn-outline-success">Add to Cart <i class="bi-cart-plus"></i></button>
+            </form>
+            {% else %}
+            <form method="POST" action="{% url 'add' p.id %}">
+                <a href="{% url 'product_details' p.id %}" class="btn btn-outline-dark">Details</a>
+                {% csrf_token %}
+            </form>
+            {% endif %}
+        </div>
+    </div>
+    {% endfor %}
 </div>
+
+</div>
+
 </body>
 </html>

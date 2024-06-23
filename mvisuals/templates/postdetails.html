@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+</head>
+
+ <style>
+         #mvisuals:first-letter
+        {
+            color: darkred;
+        }
+        h1
+        {
+            letter-spacing: 12px;
+        }
+        li:hover
+        {
+            background-color: darkred;
+        }
+
+        .images
+        {
+            width: 150px;
+            height: 100px;
+            margin: 0 20px;
+
+        }
+        .image-container
+        {
+            display:flex;
+            justify-content: center;
+        }
+
+        li:hover
+        {
+            background-color: darkred;
+        }
+
+        .images:hover
+        {
+            opacity: 60%;
+        }
+
+        li
+        {
+            list-style: none;
+        }
+        .disabled-card
+        {
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+         @keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.fade-in
+{
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+   .card {
+        background-color: #e2e3e5;
+        width: 260px;
+        border: 1px solid black;
+        border-radius: 5px;
+        margin: 20px;
+        opacity: 0;
+        transition: opacity 1s ease-in-out;
+}
+    .product-card {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        flex: 1;
+    }
+
+    .card img {
+    display: block;
+    margin: 0 auto;
+    width: 200px;
+    height: 150px;
+}
+.card-body {
+        background-color: transparent;
+        text-align: center;
+    }
+
+    .btn {
+        margin-top: 10px;
+    }
+
+    #detailsp
+    {
+        text-align: center;
+    }
+
+    #slika
+    {
+        width: 180px;
+        height: 150px;
+    }
+    .photo
+    {
+        width: 600px;
+        height: 550px;
+
+    }
+
+    </style>
+
+<body style="background-image: url('https://wallpaperaccess.com/full/1698013.jpg'); background-repeat: repeat;
+background-size: 100%">
+<div class="container-fluid bg-black p-4" style="opacity: 95%;">
+    <nav class="navbar navbar-expand-lg">
+    <div class="container-fluid d-flex align-items-center">
+        <a style="text-decoration: none;" href="/home"><h1 id="mvisuals" class="display-1 fw-lighter text-light">MVISUALS</h1></a>
+    <div class="container-fluid image-container">
+        <img class="images" src="https://www.kruger-2-kalahari.com/images/Nikon-D800-image.png">
+        <img class="images" src="https://i1.adis.ws/i/canon/eos-100d-frt-w-ef-40mm-stm_b51df3fbe1be4c4d8ae102a6534213e2">
+        <img class="images" src="https://4.imimg.com/data4/UU/UU/GLADMIN-/tmp-asia-4016499630-3857477713-365508689-3015334490-1054978028-1977458298-3353927964-3865769526-500x500.png">
+        <img class="images" src="https://i1.adis.ws/i/canon/eos_1200d-fra-w-ef-s-18-55mm-iii_24927007dfc94639bc84db101a8b7136">
+    </div>
+
+  <div class="container-fluid">
+
+    <div class="collapse navbar-collapse d-flex justify-content-end text-light fs-3 fst-italic" id="navbarNav">
+
+      <ul class="navbar-nav">
+
+        <li class="nav-item">
+          <a class="nav-link text-light" aria-current="page" href="/home">Home</a>
+        </li>
+
+        <li class="nav-item">
+          <a style="display: inline-block" class="nav-link text-light" href="/aboutus">About Us</a>
+        </li>
+
+        <li class="nav-item">
+              <a class="nav-link text-light" href="/forum">Blog</a>
+        </li>
+
+       {% if user.is_authenticated and user.role == "buy" %}
+          <li class="nav-item">
+          <a class="nav-link text-light" href="/cart">MyCart</a>
+        </li>
+      {% endif %}
+
+          {% if user.is_authenticated %}
+        <li class="nav-item">
+          <a class="nav-link text-light" href="{% url 'logout_page' %}">Logout</a>
+        </li>
+              {% else %}
+               <li class="nav-item">
+                <a class="nav-link text-light" href="/login">Login</a>
+               </li>
+          {% endif %}
+      </ul>
+    </div>
+  </div>
+    </div>
+</nav>
+</div>
+
+{% if user.is_authenticated and  user.is_superuser or post.author.username == user.username %}
+                        <div class="align-center">
+                            <button type="button" class="btn-lg btn btn-dark text-light fw-semibold w-25 m-2"
+                                data-bs-toggle="modal"
+                                data-bs-target="#editModal">
+                            EDIT POST
+                        </button>
+                        </div>
+
+                        <div class="modal" id="editModal" tabindex="-1" aria-labelledby="editModalLabel"
+                             aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content bg-light-subtle">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title fw-semibold text-dark" id="editModalLabel">Edit Post Details</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                    </div>
+
+                                    <div class="modal-body">
+                                        <form method="POST" action="{% url 'edit_post' post.id %}"
+                                              enctype="multipart/form-data">
+                                            {% csrf_token %}
+                                            <label for="title">Title</label>
+                                            <input type="text" id="title" name="title" value="{{ post.title }}"
+                                                   class="form-control mb-3">
+
+                                            <div>
+                                            <label for="content">Content</label>
+                                            <textarea rows="6" cols="6" id="content" name="content"
+                                                      class="form-control mb-3">
+                                                {{ post.content }}
+                                            </textarea>
+                                        </div>
+
+
+                                            <div>
+                                            <label for="display">Display</label>
+                                            <textarea rows="6" cols="6" id="display" name="display"
+                                                      class="form-control mb-3">
+                                                {{ post.display }}
+                                            </textarea>
+                                        </div>
+
+                                            <label for="image1">Image1</label>
+                                            <input type="file" id="image1" name="image1" class="form-control mb-3">
+
+                                        <label for="image2">Image2</label>
+                                            <input type="file" id="image2" name="image2" class="form-control mb-3">
+
+                                        <label for="image3">Image3</label>
+                                            <input type="file" id="image3" name="image3" class="form-control mb-3">
+
+                                        <label for="image4">Image4</label>
+                                            <input type="file" id="image4" name="image4" class="form-control mb-3">
+
+                                            <div class="mt-3 text-center">
+                                                <button type="submit" class="btn btn btn-lg text-light"
+                                                        style="background-color: darkolivegreen;">Save
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+          {% if user.is_authenticated and  user.is_superuser or post.author.username == user.username %}
+            <form method="POST" action="{% url 'delete_post' post_id=post.id %}">
+                {% csrf_token %}
+            <button type="submit" class="btn btn-lg btn-danger fw-semibold w-25 m-2">DELETE POST</button>
+            </form>
+            {% endif %}
+
+<div style="opacity: 90%;" class="container-fluid mt-5">
+    <div class="row d-flex bg-light-subtle justify-content-center">
+        <div class="col-lg-12">
+              <h1 style="color: black;" class="text-center display-2">{{ post.title }} </h1>
+
+            <p class="col-lg-12 fst-italic fs-1 text-end" style="color: black;" >Author: {{ post.author.username }}</p>
+            <div class="text-center d-flex">
+                <div>
+                <img class="photo d-flex justify-content-start m-1" src="{{ post.image2.url }}">
+                    <img class="photo" src="{{ MEDIA_URL }}{{ post.image3.url }}">
+                </div>
+                <div class="border border-2 border-black">
+                    <p style="letter-spacing: 1px;" class="text-center fs-2 fst-italic">{{ post.content }}</p><span class="fw-bolder fs-2 fst-italic">{{ post.created_at }}</span>
+                    </div>
+                 <div>
+                <img class="photo d-flex justify-content-end m-1" src="{{ MEDIA_URL }}{{ post.image4.url }}">
+                     <img class="photo" src="{{ MEDIA_URL }}{{ post.image1.url }}">
+                </div>
+            </div>
+        </div>
+</div>
+</div>
+</body>
+</html>
