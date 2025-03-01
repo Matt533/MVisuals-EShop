@@ -16,4 +16,4 @@ MVisuals is a fully featured e-commerce web application designed for photography
 **Containerization:** Docker, docker-compose
 
 Application is deployed on pythonanywhere.com. 
-The link is in description.
+The link is in the description.
