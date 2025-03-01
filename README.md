@@ -10,10 +10,10 @@ MVisuals is a fully featured e-commerce web application designed for photography
 - **Dockerized:** Seamless deployment with Docker and docker-compose for PostgreSQL database orchestration.
   
 # Tech Stack
-**Backend:** Django
-**Frontend:** Bootstrap 5
-**Database:** PostgreSQL (Dockerized)
-**Containerization:** Docker, docker-compose
+- **Backend:** Django
+- **Frontend:** Bootstrap 5
+- **Database:** PostgreSQL (Dockerized)
+- **Containerization:** Docker, docker-compose
 
 ## Installation
 1. Open directory:
