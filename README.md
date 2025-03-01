@@ -15,5 +15,18 @@ MVisuals is a fully featured e-commerce web application designed for photography
 **Database:** PostgreSQL (Dockerized)
 **Containerization:** Docker, docker-compose
 
-Application is deployed on pythonanywhere.com. 
-The link is in the description.
+## Installation
+1. Open directory:
+   - cd hw5_final
+2. Install dependencies:
+   - pip install python
+   - pip install django
+3. Apply latest migrations:
+   -python manage.py makemigrations
+   -python manage.py migrate
+4. Run App:
+   - python manage.py runserver
+5. Open at:
+   - http://localhost:3000
+   
+- Application is deployed on pythonanywhere.com. The link is in the description.
