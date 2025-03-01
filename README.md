@@ -22,8 +22,8 @@ MVisuals is a fully featured e-commerce web application designed for photography
    - pip install python
    - pip install django
 3. Apply latest migrations:
-   -python manage.py makemigrations
-   -python manage.py migrate
+   - python manage.py makemigrations
+   - python manage.py migrate
 4. Run App:
    - python manage.py runserver
 5. Open at:
