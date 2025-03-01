@@ -1,7 +1,18 @@
-# mvisuals
-MVisuals - A Django Web App for Photo & Video Gear
-# This application is an e-commerce shop that targets users that love to photograph and document their adventures.
-# The application has a responsive User Interface made with Bootstrap 5.
-# Its main features are searching products by given keyword, filtering by category and adding products to card.
-# For the deployment part the app is dockerized using Docker and its Postgres database is orchestrated with docker-compose.
-# Deployed: https://matejljusev.pythonanywhere.com/
+# MVisuals - E-commerce Django App
+
+MVisuals is a fully featured e-commerce web application designed for photography enthusiasts and professionals. The app is built with Django for the backend, Bootstrap for the frontend, and PostgreSQL for the database, orchestrated using Docker.
+
+# Key Features
+- **Product Search & Filters:** Users can search for products by category or name.
+- **User Authentication:** Users can create accounts and manage profiles.
+- **Shopping Cart & Checkout:** Users can add products to their cart and proceed to a simple checkout.
+- **Responsive UI:** Optimized for both mobile and desktop views.
+- **Dockerized:** Seamless deployment with Docker and docker-compose for PostgreSQL database orchestration.
+- 
+# Tech Stack
+**Backend:** Django
+**Frontend:** Bootstrap 5
+**Database:** PostgreSQL (Dockerized)
+**Containerization:** Docker, docker-compose
+
+App is available at: https://matejljusev.pythonanywhere.com/
