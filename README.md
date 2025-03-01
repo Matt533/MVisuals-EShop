@@ -8,7 +8,7 @@ MVisuals is a fully featured e-commerce web application designed for photography
 - **Shopping Cart & Checkout:** Users can add products to their cart and proceed to a simple checkout.
 - **Responsive UI:** Optimized for both mobile and desktop views.
 - **Dockerized:** Seamless deployment with Docker and docker-compose for PostgreSQL database orchestration.
-- 
+  
 # Tech Stack
 **Backend:** Django
 **Frontend:** Bootstrap 5
