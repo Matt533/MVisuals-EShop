@@ -15,4 +15,5 @@ MVisuals is a fully featured e-commerce web application designed for photography
 **Database:** PostgreSQL (Dockerized)
 **Containerization:** Docker, docker-compose
 
-App is available at: https://matejljusev.pythonanywhere.com/
+Application is deployed on pythonanywhere.com. 
+The link is in description.
